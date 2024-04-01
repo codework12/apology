@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apology Journey</title>
+    <style>
+       body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: none; /* Initially set to none */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333; /* Text color set to white */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            animation: fadeIn 1s;
+        
+        }
+
+        .container:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            animation: fadeIn 1s;
+        }
+
+        h1 {
+            text-align: center;
+            color: #555;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #777;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .animation {
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .spotify-animation {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        .bar {
+            width: 10px;
+            height: 100px;
+            background-color: #1DB954;
+            margin: 0 5px;
+            animation: soundPulse 1s infinite alternate;
+        }
+
+        @keyframes soundPulse {
+            from {
+                height: 100px;
+            }
+            to {
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in">
+        <h1>An Apology Journey</h1>
+        <p>Once upon a time, in a world not so different from ours, there lived two souls intertwined in love's delicate dance. However, as fate would have it, a rift appeared, and a mistake was made.</p>
+        <p>Dear Babe,</p>
+        <p>It's hard for me to say this, but I need to ask for your forgiveness. I've made mistakes that have hurt you, and I feel terrible about it. But I'm not giving up hope. I believe we can work through this together. Let's face these challenges head-on and learn from them. I'm truly sorry, and I promise to do whatever it takes to make things right.</p>
+        <p>Yours sincerely,</p>
+        <p>Your love</p>
+
+        <div id="audioControls">
+            <button id="playButton" onclick="playAudio()">Play</button>
+            <button id="pauseButton" onclick="pauseAudio()">Pause</button>
+        </div>
+    </div>
+
+    <div class="letter-container">
+        <!-- Your letter content here -->
+    </div>
+
+    <footer>
+        <p>© Apology Journey | All My Rights Reserved By You</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>This is a heartfelt message for you...</p>
+            <!-- Add your heartfelt message here -->
+        </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="audio" src="meo.mpeg"></audio>
+
+    <!-- Spotify-like animation -->
+    <div class="spotify-animation" id="spotifyAnimation"></div>
+
+    <script>
+        var audio = document.getElementById("audio");
+        var playButton = document.getElementById("playButton");
+        var pauseButton = document.getElementById("pauseButton");
+
+        function playAudio() {
+            audio.play();
+            playButton.disabled = true;
+            pauseButton.disabled = false;
+            startAnimation();
+            // Change background image when play button is pressed
+            document.body.style.backgroundImage = "url('love.jpg')";h
+        }
+
+        function pauseAudio() {
+            audio.pause();
+            playButton.disabled = false;
+            pauseButton.disabled = true;
+            stopAnimation();
+        }
+
+        // Spotify-like animation
+        function startAnimation() {
+            var animationContainer = document.getElementById("spotifyAnimation");
+            var bars = '';
+
+            // Number of bars
+            var numBars = 30;
+
+            // Create bars
+            for (var i = 0; i < numBars; i++) {
+                bars += '<div class="bar"></div>';
+            }
+
+            // Add bars to animation container
+            animationContainer.innerHTML = bars;
+        }
+
+        function stopAnimation() {
+            var animationContainer = document.getElementById("spotifyAnimation");
+            animationContainer.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
